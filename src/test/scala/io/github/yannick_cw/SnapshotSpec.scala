@@ -18,15 +18,15 @@ class SnapshotSpec extends SnapshotTesting with Snapshot {
     import io.circe.generic.auto._
 
     val t = Tester("name", 25)
-    t should matchSnapshot[Tester](2)
+    t should matchSnapshot[Tester]
   }
 
   it should "work with multiple snapshots in a single block" in { implicit n =>
     case class Tester(a: String, b: Int)
     import io.circe.generic.auto._
 
-    Tester("name", 25) should matchSnapshot[Tester](3)
-    autoAccept(Tester("another name", 99) should matchSnapshot[Tester](4))
+    Tester("name", 25) should matchSnapshot[Tester](1)
+    autoAccept(Tester("another name", 99) should matchSnapshot[Tester](2))
   }
 
   it should "not match snapshot for different result" in { implicit n =>

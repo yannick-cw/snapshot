@@ -18,8 +18,7 @@ trait Snapshot extends Matchers with TestNameFixture { self: TestSuite =>
   private lazy val className = getClass.getSimpleName
   new File(folderPath).mkdir()
 
-  private def updateSnapshot[T](id: String, testName: String, left: String, right: String)(
-      implicit s: Serializer[T]): MatchResult =
+  private def updateSnapshot[T](id: String, testName: String, left: String, right: String): MatchResult =
     if (StdIn.readLine(updateQuestion(left, right, className, testName)) == "y") {
       writeFile(id, left, folderPath)
       MatchResult(true, "", "Updated the snapshot file")
